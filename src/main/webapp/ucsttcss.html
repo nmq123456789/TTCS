@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Algorithm UCS</title>
+  <style>
+    h1 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0px;
+    }
+
+    h1 .button {
+      font-size: 25px;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ecf0f1;
+      height: 100vh;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    textarea,
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    #thuat_toan button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    #thuat_toan button:hover {
+      background-color: #3e8e41;
+    }
+
+    .button {
+      position: relative;
+      padding: 1em 1.5em;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      outline: none;
+      font-size: 18px;
+      margin: 1em 0.8em;
+    }
+
+    .button.type1 {
+      color: black;
+    }
+
+    .button.type1 {
+      color: black;
+    }
+
+    .button.type1.type1::after,
+    .button.type1.type1::before {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 20%;
+      height: 20%;
+      border: 2px solid;
+      transition: all 0.6s ease;
+      border-radius: 2px;
+    }
+
+    .button.type1.type1::after {
+      bottom: 0;
+      right: 0;
+      border-top-color: transparent;
+      border-left-color: transparent;
+      border-bottom-color: black;
+      border-right-color: black;
+    }
+
+    .button.type1.type1::before {
+      top: 0;
+      left: 0;
+      border-bottom-color: transparent;
+      border-right-color: transparent;
+      border-top-color: #566473;
+      border-left-color: #566473;
+    }
+
+    .button.type1.type1:hover:after,
+    .button.type1.type1:hover:before {
+      width: 100%;
+      height: 100%;
+    }
+
+    .button.type2 {
+      color: black;
+    }
+
+    .button.type2.type2:after,
+    .button.type2.type2:before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: red;
+      transition: all 0.3s ease;
+      transform: scale(0.85);
+    }
+
+    .button.type2.type2:hover:before {
+      top: 0;
+      transform: scale(1);
+    }
+
+    .button.type2.type2:hover:after {
+      transform: scale(1);
+    }
+
+    .button.type3 {
+      color: black;
+      margin-left: 15px;
+    }
+
+    .button.type3.type3::after,
+    .button.type3.type3::before {
+      content: "";
+      display: block;
+      position: absolute;
+      width: 20%;
+      height: 20%;
+      border: 2px solid;
+      transition: all 0.6s ease;
+      border-radius: 2px;
+    }
+
+    .button.type3.type3::after {
+      bottom: 0;
+      right: 0;
+      border-top-color: transparent;
+      border-left-color: transparent;
+      border-bottom-color: #435a6b;
+      border-right-color: #435a6b;
+    }
+
+    .button.type3.type3::before {
+      top: 0;
+      left: 0;
+      border-bottom-color: transparent;
+      border-right-color: transparent;
+      border-top-color: #435a6b;
+      border-left-color: #435a6b;
+    }
+
+    .button.type3.type3:hover:after,
+    .button.type3.type3:hover:before {
+      border-bottom-color: #435a6b;
+      border-right-color: #435a6b;
+      border-top-color: #435a6b;
+      border-left-color: #435a6b;
+      width: 100%;
+      height: 100%;
+    }
+
+    #graph-input {
+      height: 200px;
+      resize: vertical;
+    }
+
+    * {
+      /* padding: 0; */
+      margin: 0;
+    }
+
+    #container {
+      height: 100vh;
+    }
+
+    .tieu_de {
+      min-height: 100px;
+    }
+
+    .khai_niem {
+      min-height: 100px;
+    }
+
+    .Left {
+      width: calc(40% - 30px);
+      min-height: 300px;
+      float: left;
+      margin-top: 30px;
+      margin-left: 30px;
+    }
+
+    .Right {
+      width: 60%;
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      float: left;
+    }
+
+    .Draw {
+      min-height: 0px;
+      min-height: 0px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      align-content: center;
+      /* background-color: ; */
+    }
+
+    #thuattoan{
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
+    <div class="tieu_de">
+      <h1><button class="button type1" style="margin-left: 30px;"> <strong>Thuật toán UCS</strong></button></h1>
+    </div>
+    <div class="khai_niem">
+      <button class="button type2" onclick="dinhnghia()"><strong>Định nghĩa</strong></button>
+      <br>
+      <p id="dinh_nghia" style="margin: 5px 25px;"></p>
+      <div id="thuattoan" style="margin-top: 20px; margin-left: 25px; line-height: 25px;">
+        <strong>Thuật toán</strong>
+        <p><strong>Bước 1:</strong> Khởi tạo</p>
+        <ul>
+          <li>Khởi tạo đỉnh bắt đầu và đặt giá trị của nó bằng 0.</li>
+          <li>Sau đó, đưa nó vào hàng đợi ưu tiên (priority queue) với giá trị ưu tiên là giá trị g của đỉnh đó.</li>
+        </ul>
+        <p><strong>Bước 2:</strong> Lặp</p>
+        <ul>
+          <li>Với mỗi vòng lặp, lấy ra đỉnh có giá trị ưu tiên nhỏ nhất từ hàng đợi ưu tiên.</li>
+          <li>Nếu đỉnh đó là đích, kết thúc thuật toán và trả về đường đi tìm được.</li>
+          <li>Nếu không, mở rộng đỉnh đó bằng cách xét tất cả các đỉnh kề với nó và tính toán giá trị g mới cho các đỉnh
+            đó.</li>
+          <li>Nếu đỉnh kề chưa được thăm, đưa nó vào hàng đợi ưu tiên với giá trị ưu tiên là giá trị g mới của nó.</li>
+        </ul>
+        <p><strong>Bước 3:</strong> Cập nhật</p>
+        <ul>
+          <li>Nếu đỉnh đã được thăm và giá trị g của nó lớn hơn giá trị g mới tính toán được, cập nhật giá trị g mới và
+            đẩy lại đỉnh vào hàng đợi ưu tiên với giá trị ưu tiên mới.</li>
+        </ul>
+        <p><strong>Bước 4:</strong> Lặp lại bước 3 và 4 cho đến khi đến được đỉnh đích hoặc khi hàng đợi ưu tiên trống.</p>
+        <p><strong>Bước 5:</strong> Kết thúc</p>
+        <ul>
+          <li>Nếu không tìm thấy đường đi từ đỉnh bắt đầu đến đỉnh đích, kết thúc thuật toán và trả về kết quả không tìm thấy.</li>
+        </ul>
+      </div>
+    </div>
+    <div id="k">
+      <button class="button type3">
+        <strong>Chương trình thực hiện</strong>
+      </button>
+    </div>
+    <div class="Draw">
+      <svg id="graph" width="800" height="400"></svg>
+    </div>
+    <div id="thuat_toan">
+      <div class="Left">
+        <table>
+          <tr>
+            <td><label for="start"> Nhập đỉnh bắt đầu:</td>
+            <td><input type="text" id="start"></td>
+          </tr>
+          <tr>
+            <td><label for="end">Nhập đỉnh kết thúc:</label></td>
+            <td><input type="text" id="end"></td>
+          </tr>
+        </table>
+        <div style="margin-top: 8px; margin-bottom: 10px"><button onclick="runAlgorithm()">Chạy thuật toán</button>
+        </div>
+        <p id="ket_qua" style="font-family: Arial, sans-serif;"></p>
+      </div>
+      <div class="Right">
+        <label for="graph-input">Nhập danh sách cạnh của ma trận</label>
+        <br>
+        <textarea id="graph-input" style="font-family: Arial, sans-serif; min-height: 260px">
+        [
+          ["S", "A", 55],
+          ["S", "E", 72],
+          ["S", "B", 42],
+          ["S", "C", 48],
+          ["A", "D", 45],
+          ["D", "E", 45],
+          ["E", "G", 82],
+          ["B", "F", 40],
+          ["C", "B", 40],
+          ["C", "F", 68],
+          ["C", "H", 73],
+          ["F", "G", 50],
+          ["H", "G", 60]
+        ]
+        </textarea>
+      </div>
+    </div>
+  </div>
+
+</body>
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="https://d3js.org/d3-drag.v2.min.js"></script>
+<script>
+  function dinhnghia() {
+    document.getElementById("dinh_nghia").innerHTML = "Thuật toán UCS là một cách duyệt cây dùng cho việc duyệt hay tìm kiếm trên cây có trọng lượng chi phí. Thuật toán sẽ phát triển các nút chưa xét có chi phí thấp nhất – các nút được xét theo thứ tự chi phí tăng dần.Khi đồ thi có chi phí ở mỗi bước là như nhau thì thuật toán trở thành phương pháp tìm kiếm theo chiều rông."
+    document.getElementById('thuattoan').style.display = "block";
+  }
+
+  function Draw() {
+    d3.select("svg").selectAll("*").remove();
+    const svg = d3.select("svg");
+    const width = +svg.attr("width");
+    const height = +svg.attr("height");
+
+    const graphInput = document.getElementById('graph-input').value;
+
+    // Chuyển đổi chuỗi đồ thị thành đối tượng JavaScript
+    const links = JSON.parse(graphInput)
+
+    const drag = simulation => {
+      function dragstarted(event) {
+        if (!event.active) simulation.alphaTarget(0.3).restart();
+        event.subject.fx = event.subject.x;
+        event.subject.fy = event.subject.y;
+      }
+
+      function dragged(event) {
+        event.subject.fx = event.x;
+        event.subject.fy = event.y;
+      }
+
+      function dragended(event, d) {
+        if (!event.active) simulation.alphaTarget(0);
+        event.subject.fx = null;
+        event.subject.fy = null;
+      }
+
+      return d3.drag()
+        .on("start", dragstarted)
+        .on("drag", dragged)
+        .on("end", dragended);
+    };
+
+    const nodes = Array.from(new Set(links.flatMap(d => [d[0], d[1]])), d => ({ name: d }));
+    const linksFormatted = links.map(d => ({
+      source: nodes.find(n => n.name === d[0]),
+      target: nodes.find(n => n.name === d[1]),
+      value: +d[2]
+    }));
+
+
+    console.log(nodes); // In ra tập node data
+    console.log(linksFormatted); // In ra tập link data
+
+    const simulation = d3.forceSimulation()
+      .force("charge", d3.forceManyBody().strength(-1000))
+      .force("center", d3.forceCenter(width / 2, height / 2))
+      .force("link", d3.forceLink().id(d => d.index))
+      .nodes(Object.values(nodes));
+
+    simulation.force("link")
+      .links(linksFormatted);
+
+    // Tạo các nhóm để chứa nút và liên kết
+    const linkGroup = d3.select("#graph")
+      .selectAll(".link")
+      .data(linksFormatted)
+      .join("line")
+      .attr("class", "link")
+      .attr("stroke-width", d => 2)
+      .attr("marker-end", "url(#arrow)");
+
+    const linkText = d3.select("#graph")
+      .selectAll(".link-text")
+      .data(linksFormatted)
+      .join("text")
+      .attr("class", "link-text")
+      .attr("dy", ".30em")
+      .text(d => d.value);
+
+    svg.append("defs").selectAll("marker")
+      .data(["arrow"]) // Đặt tên marker
+      .enter().append("marker")
+      .attr("id", function (d) { return d; })
+      .attr("viewBox", "0 -5 10 10")
+      .attr("refX", 22) // Vị trí marker đặt trên liên kết
+      .attr("refY", 0)
+      .attr("markerWidth", 6)
+      .attr("markerHeight", 6)
+      .attr("orient", "auto")
+      .append("path")
+      .attr("fill", "red")
+      .attr("d", "M0,-5L10,0L0,5");
+
+    const nodeGroup = d3.select("#graph")
+      .selectAll(".node")
+      .data(simulation.nodes())
+      .join("g")
+      .attr("class", "node");
+
+    nodeGroup.append("circle")
+      .attr("stroke", "#000")
+      .attr("stroke-width", 1.5)
+      .attr("r", 15)
+      .attr("fill", "#4CAF50")
+      .attr("class", "node");
+
+    nodeGroup.append("text")
+      .text(d => d.name)
+      .attr("dx", 0)
+      .attr("dy", ".30em")
+      .attr("text-anchor", "middle")
+      .attr("class", "node");
+
+    // Thiết lập tọa độ ban đầu cho mỗi nút
+    simulation.on("tick", () => {
+
+      linkGroup
+        .attr("x1", d => d.source.x)
+        .attr("y1", d => d.source.y)
+        .attr("x2", d => d.target.x)
+        .attr("y2", d => d.target.y);
+
+      linkText
+        .attr("stroke", "goldenrod")
+        .attr("x", d => (d.source.x + d.target.x + 4) / 2)
+        .attr("y", d => (d.source.y + d.target.y) / 2);
+
+
+      nodeGroup.attr("transform", d => `translate(${d.x},${d.y})`);
+    });
+
+
+
+    // Thiết lập màu sắc cho liên kết
+    linkGroup.attr("stroke", "black");
+
+    nodeGroup.call(drag(simulation));
+  }
+
+  Draw();
+
+
+  function runAlgorithm() {
+    Draw()
+    // Đọc đồ thị từ ô nhập văn bản
+    const start = document.getElementById("start").value;
+    console.log(start)
+
+    const goal = document.getElementById("end").value;
+    console.log(goal)
+    const graphInput = document.getElementById('graph-input').value;
+
+    // Chuyển đổi chuỗi đồ thị thành đối tượng JavaScript
+    const graph = JSON.parse(graphInput)
+    console.log(graph)
+
+    with_graph(graph, function (UCS) {
+      if (start != "" && goal != "") document.getElementById("ket_qua").innerHTML = `Đường đi và chi phí từ ${start} đến ${goal} theo thuật toán UCS là: ${write_path(UCS(start, goal))}`;
+      else {
+        alert("Chưa nhập điểm đầu hoặc điểm cuối")
+      }
+    })
+
+    //UCS
+
+    function make_path(state, cost, parent) {
+      return {
+        state: state,
+        cost: cost,
+        parent: parent
+      };
+    };
+
+    function write_path(path) {
+      var s = "";
+      if (!path) return "Không có đường đi";
+      if (path.parent) s = write_path(path.parent) + " -> ";
+      s += path.state + "(" + path.cost + ")";
+      return s;
+    };
+
+    function make_graph(ways) {
+      var graph = {};
+      function link(s1, s2, cost) {
+        var h = graph[s1] || (graph[s1] = {});
+        h[s2] = cost;
+      };
+      for (var i = 0; i < ways.length; ++i) {
+        var w = ways[i];
+        link(w[0], w[1], w[2]);
+        // link(w[1], w[0], w[2]);
+      }
+      return graph;
+    };
+
+    // find the index of the element in array `a` for which
+    // f(el) returns the smallest value.
+    function find_min(a, f) {
+      var min = null, pos = null;
+      for (var i = 0; i < a.length; ++i) {
+        var el = f(a[i]);
+        if (min === null || min > el) {
+          min = el;
+          pos = i;
+        }
+      }
+      return pos;
+    };
+
+    // remove and return the path having the minimum cost
+    function remove_choice(frontier) {
+      var index = find_min(frontier, function (path) {
+        return path.cost;
+      });
+      var it = frontier[index];
+      frontier.splice(index, 1); // remove it
+      return it;
+    };
+
+    function with_graph(def, func) {
+      var graph = make_graph(def);
+
+      // for a given state returns the possible actions; this is an
+      // array of elements containing next state and cost to go there.
+      function actions(state) {
+        var a = [], s = graph[state];
+        for (var i in s) {
+          a.push({ state: i, cost: s[i] });
+        }
+        return a;
+      };
+
+      function uniform_cost_search(start, goal, gossip) {
+        var frontier = [make_path(start, 0, null)];
+        var explored = {};
+        while (frontier.length > 0) {
+          var path = remove_choice(frontier);
+          explored[path.state] = 1;
+          if (gossip) gossip(path, frontier, explored);
+          if (path.state == goal) return path;
+          actions(path.state).forEach(function (a) {
+            if (!explored[a.state]) {
+              var p = make_path(a.state, a.cost + path.cost, path);
+              frontier.push(p);
+            }
+          });
+        }
+      };
+
+      func(uniform_cost_search);
+    };
+  }
+</script>
+
+</html>
