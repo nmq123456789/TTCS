@@ -1,6 +1,6 @@
 # TTCS
-JAVA SERVLET
-HTML CSS JS D3
+JAVA SERVLET \n
+HTML CSS JS D3 \n
 # Libraries
 jstl- 1.2.jar
 jstl-impl-1.2.jar
